@@ -55,7 +55,7 @@ static const int kBufferSize  = 1000000;
 //---------------------------------------------------------------------------
 
 DelphesSTDHEPReader::DelphesSTDHEPReader() :
-  fInputFile(0), fBuffer(0), fPDG(0), fBlockType(-1)
+  fInputFile(0), fBuffer(0), fPDG(0), fBlockType(-1), fIDRUPlh(0)
 {
   fBuffer = new uint8_t[kBufferSize*96 + 24];
 
@@ -418,7 +418,7 @@ void DelphesSTDHEPReader::ReadSTDHEP4()
   SkipArray(8);
   SkipArray(4);
 
-  SkipBytes(4);
+  fReader[0].ReadValue(&fIDRUPlh, 4);
 }
 
 //---------------------------------------------------------------------------
@@ -432,7 +432,7 @@ void DelphesSTDHEPReader::AnalyzeEvent(ExRootTreeBranch *branch, long long event
 
   element->Number = fEventNumber;
 
-  element->ProcessID = 0;
+  element->ProcessID = fIDRUPlh;
 
   element->Weight = fWeight;
   element->ScalePDF = fScale[0];

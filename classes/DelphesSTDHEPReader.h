@@ -99,6 +99,7 @@ private:
   int32_t fBlockType, fEventNumber, fEventSize;
   double fWeight, fAlphaQCD, fAlphaQED;
 
+  uint32_t fIDRUPlh;
   uint32_t fScaleSize;
   double fScale[10];
 };
